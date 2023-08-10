@@ -2,9 +2,13 @@
 
 <% @posts.each do |post| %>
   <div>
-    <p><%= image_tag post.get_spot_image, size: '250x150' %></p>
+    <p>
+    <%= link_to post_path(post.id) do %>
+      <%= image_tag post.get_spot_image, size: '250x150' %>
+    <% end %>
+    </p>
     <p>スポット名：<%= post.name %></p>
-    <p>スポット説明：<%= post.explanation %></p>
+    <!--<p>スポット説明：<%= post.explanation %></p>-->
     <!--<p>投稿ユーザー画像<p>-->
     <!--<p>ユーザーネーム</p>-->
   </div>

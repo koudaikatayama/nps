@@ -1,2 +1,27 @@
 <h1>Posts#show</h1>
-<p>Find me in app/views/posts/show.html.erb</p>
+
+<div>
+
+<table class='table'>
+  		  <tr>
+          <!--<td>ユーザー画像と名前</td>-->
+          <td><%= image_tag @post.get_spot_image, size: '500x300'%></td>
+          <td>スポット名：<%= @post.name %></td>
+          <!--ジャンル-->
+          <td>住所 : <%= @post.address %></td>
+          <td>スポット説明：<%= @post.explanation %></td>
+          <td>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></td>
+          
+          <td>
+            <% if @post.user == current_user %>
+             <%= link_to 'Edit', edit_post_path, class: "btn btn-sm btn-success" %>
+            <% end %>
+          </td>
+          <td>
+            <% if @post.user == current_user %>
+             <%= link_to 'Destroy', @post, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+</div>
