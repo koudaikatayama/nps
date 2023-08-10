@@ -1,2 +1,11 @@
 <h1>Posts#index</h1>
-<p>Find me in app/views/posts/index.html.erb</p>
+
+<% @posts.each do |post| %>
+  <div>
+    <p><%= image_tag post.get_spot_image, size: '250x150' %></p>
+    <p>スポット名：<%= post.name %></p>
+    <p>スポット説明：<%= post.explanation %></p>
+    <!--<p>投稿ユーザー画像<p>-->
+    <!--<p>ユーザーネーム</p>-->
+  </div>
+<% end %>
