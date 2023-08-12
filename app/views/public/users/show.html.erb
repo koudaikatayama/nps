@@ -1,1 +1,22 @@
-<h1>mypage</h1>
+<div class='container'>
+ <div class='row'>
+  <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+    
+<table class='table'>
+  <tr><%= image_tag @user.get_profile_image, style: "border-radius: 50%; width: 200px; height: 200px; object-fit:cover;" %></tr>
+  <tr>
+	  <th>name</th>
+	  <th><%= @user.name %></th>
+  </tr>
+  <tr>
+	  <th>introduction</th>
+	  <th><%= @user.introduction %></th>
+  </tr>
+</table>
+ <div>
+  <%= link_to "編集",users_information_edit_path(@user),class: "btn btn-outline-secondary btn-block edit_user_#{@user.id}" %>
+ </div>
+ 
+  </div>
+ </div>
+</div>

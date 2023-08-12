@@ -1,2 +1,17 @@
 <h1>Users#check</h1>
-<p>Find me in app/views/users/check.html.erb</p>
+
+<div class="container">
+<div class="mx-auto mb-5">
+<h4 class="font-weight-bold text-center mt-5 mb-5">本当に退会しますか？</h4>
+
+<P class="text-center mt-5">退会すると、会員登録情報や</br>
+</br>
+退会する場合は、「退会する」をクリックしてください。<p>
+
+<div class="text-center mt-4">
+  <%= link_to "退会しない", users_mypage_path, class:"btn btn-primary " %>
+  <%= link_to "退会する", users_withdraw_path, method: :patch, class:"btn btn-danger ml-4", data: { confirm: "本当に退会しますか？" } %>
+</div>
+
+</div>
+</div>
