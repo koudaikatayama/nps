@@ -1,17 +1,36 @@
-<h1>Posts#index</h1>
+<h1>投稿一覧</h1>
 
+<div class='container'>
+<div class='row'>
+<div class='col-md-2'>
+ <%= render 'public/users/info', user: current_user %>
+</div>
+
+<div class='col-md-9 offset-md-1'>
 <% @posts.each do |post| %>
   <div>
     <p>
-    <%= link_to post_path(post.id) do %>
+      <%= link_to users_mypage_path(post.user) do %>
+          <%= image_tag post.user.get_profile_image, style: "border-radius: 50%; width: 50px; height: 50px; object-fit:cover;" %>
+          <%= post.user.name %>
+      <% end %>
+    </p>
+    <p><%= link_to post_path(post.id) do %>
       <%= image_tag post.get_spot_image, size: '250x150' %>
     <% end %>
     </p>
-    <p>スポット名：<%= post.name %></p>
+    <p><%= link_to post_path(post.id) do %>
+      スポット名：<%= post.name %>
+      <% end %>
+    </p>
     <p><%= render "public/likes/btn", post: post %></p>
     <p>コメント数： <%= post.comments.count %></p>
     <!--<p>スポット説明：<%= post.explanation %></p>-->
-    <!--<p>投稿ユーザー画像<p>-->
-    <!--<p>ユーザーネーム</p>-->
   </div>
 <% end %>
+
+</div>
+
+
+</div>
+</div>
