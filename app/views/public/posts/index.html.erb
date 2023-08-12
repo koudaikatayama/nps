@@ -8,6 +8,8 @@
     <% end %>
     </p>
     <p>スポット名：<%= post.name %></p>
+    <p><%= render "public/likes/btn", post: post %></p>
+    <p>コメント数： <%= post.comments.count %></p>
     <!--<p>スポット説明：<%= post.explanation %></p>-->
     <!--<p>投稿ユーザー画像<p>-->
     <!--<p>ユーザーネーム</p>-->

@@ -10,6 +10,8 @@
           <!--ジャンル-->
           <td>住所 : <%= @post.address %></td>
           <td>スポット説明：<%= @post.explanation %></td>
+          <td><%= render "public/likes/btn", post: @post %></td>
+          <td>コメント数： <%= @post.comments.count %></td>
           <td>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></td>
           
           <td>
@@ -24,4 +26,7 @@
           </td>
         </tr>
       </table>
+      
+      <%= render "public/comments/form", post: @post, comment: @comment %>
+      <%= render "public/comments/index", post: @post %>
 </div>
