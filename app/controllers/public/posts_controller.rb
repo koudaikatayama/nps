@@ -4,6 +4,12 @@ class Public::PostsController < ApplicationController
   
   def index
     @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
+    if params[:keyword]
+      @posts = @posts.search(params[:keyword]).page(params[:page])
+    else
+      @posts = @posts.page(params[:page])
+    end
+      @keyword = params[:keyword]
   end
 
   def new

@@ -1,5 +1,10 @@
-<table class='table'>
+<div class=''>
+ <table class='table'>
   <tr><%= image_tag user.get_profile_image, style: "border-radius: 50%; width: 100px; height: 100px; object-fit:cover;" %></tr>
   <tr><th><%= user.name %></th></tr>
   <tr><th><%= user.introduction %></th></tr>
-</table>
+ </table>
+ <div>
+  <%= link_to "新規投稿",new_post_path,class: "btn btn-outline-success btn-block" %>
+ </div>
+</div>

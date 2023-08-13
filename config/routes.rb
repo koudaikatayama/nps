@@ -37,6 +37,7 @@ Rails.application.routes.draw do
         get :likes
       end
     end
+    get "search" => "posts#search"
   end
   
   namespace :admin do
