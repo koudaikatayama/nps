@@ -2,11 +2,11 @@
 
 <div class='container'>
 <div class='row'>
-<div class='col-md-2'>
+<div class='col-md-3'>
  <%= render 'public/users/info', user: current_user %>
 </div>
 
-<div class='col-md-9 offset-md-1'>
+<div class='col-md-8 offset-md-0'>
 <% @posts.each do |post| %>
   <div>
     <p>
@@ -23,7 +23,7 @@
       スポット名：<%= post.name %>
       <% end %>
     </p>
-    <p><%= render "public/likes/btn", post: post %></p>
+    <p id="like_btn_<%= post.id %>"><%= render "public/likes/btn", post: post %></p>
     <p>コメント数： <%= post.comments.count %></p>
     <!--<p>スポット説明：<%= post.explanation %></p>-->
   </div>
