@@ -27,6 +27,12 @@ Rails.application.routes.draw do
     patch "users/information" => "users#update"
     get "/users/check" => "users#check"
     patch "/users/withdraw" => "users#withdraw"
+    
+    resources :users do
+      member do
+        get :likes
+      end
+    end
   end
   
   namespace :admin do

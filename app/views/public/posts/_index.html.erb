@@ -1,0 +1,21 @@
+<% @posts.each do |post| %>
+  <div>
+    <p>
+      <%= link_to users_mypage_path(post.user) do %>
+          <%= image_tag post.user.get_profile_image, style: "border-radius: 50%; width: 50px; height: 50px; object-fit:cover;" %>
+          <%= post.user.name %>
+      <% end %>
+    </p>
+    <p><%= link_to post_path(post.id) do %>
+      <%= image_tag post.get_spot_image, size: '250x150' %>
+    <% end %>
+    </p>
+    <p><%= link_to post_path(post.id) do %>
+      スポット名：<%= post.name %>
+      <% end %>
+    </p>
+    <p id="like_btn_<%= post.id %>"><%= render "public/likes/btn", post: post %></p>
+    <p id="comment_counter"><%= render "public/comments/counter", post: post %></p>
+    <!--<p>スポット説明：<%= post.explanation %></p>-->
+  </div>
+<% end %>
