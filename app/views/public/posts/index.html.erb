@@ -24,7 +24,7 @@
       <% end %>
     </p>
     <p id="like_btn_<%= post.id %>"><%= render "public/likes/btn", post: post %></p>
-    <p>コメント数： <%= post.comments.count %></p>
+    <p id="comment_counter"><%= render "public/comments/counter", post: post %></p>
     <!--<p>スポット説明：<%= post.explanation %></p>-->
   </div>
 <% end %>
