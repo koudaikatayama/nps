@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_10_122324) do
+ActiveRecord::Schema.define(version: 2023_08_13_105041) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -52,6 +52,15 @@ ActiveRecord::Schema.define(version: 2023_08_10_122324) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "association_post_and_tags", force: :cascade do |t|
+    t.integer "post_id", null: false
+    t.integer "tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id"], name: "index_association_post_and_tags_on_post_id"
+    t.index ["tag_id"], name: "index_association_post_and_tags_on_tag_id"
+  end
+
   create_table "comments", force: :cascade do |t|
     t.text "comment"
     t.integer "user_id", null: false
@@ -84,6 +93,12 @@ ActiveRecord::Schema.define(version: 2023_08_10_122324) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "tags", force: :cascade do |t|
+    t.string "tag_type", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -101,4 +116,6 @@ ActiveRecord::Schema.define(version: 2023_08_10_122324) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "association_post_and_tags", "posts"
+  add_foreign_key "association_post_and_tags", "tags"
 end

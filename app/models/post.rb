@@ -6,6 +6,9 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_one_attached :spot_image
   
+  has_many :association_post_and_tags, dependent: :destroy
+  has_many :tags, through: :association_post_and_tags
+  
   validates :name, presence: true
   validates :explanation, length: { minimum: 1, maximum: 100 }
     

@@ -11,6 +11,11 @@
           <td>スポット説明：<%= @post.explanation %></td>
           <td id="like_btn_<%= @post.id %>"><%= render "public/likes/btn", post: @post %></td>
           <td id="comment_counter"><%= render "public/comments/counter", post: @post %></td>
+          <td>
+           <% @post.tags.each do |tag| %>
+            <%= tag.tag_type %>
+           <% end %>
+          </td>
           <td>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></td>
           
           <td>
