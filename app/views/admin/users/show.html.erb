@@ -1,2 +1,47 @@
-<h1>Admin::Users#show</h1>
-<p>Find me in app/views/admin/users/show.html.erb</p>
+<div class="container border border-white contents-area bg-white" >
+ <div class="row mt-5 mb-5">
+  <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 mx-auto">
+
+    <h3 class="table-active text-center"><strong class=""><%= @user.name %>さんの会員詳細</strong></h3>
+      <table class="table table-border contents-area mt-5">
+
+             <tr>
+              <th class="text-left">プロフィール画像</th>
+              <th><%= image_tag @user.get_profile_image, style: "border-radius: 50%; width: 150px; height: 150px; object-fit:cover;" %></th>
+             </tr>
+             <tr>
+              <th class="text-left">会員ID</th>
+              <th><%= @user.id %></th>
+             </tr>
+
+            <tr>
+              <th class="text-left">氏名</th>
+              <th><%= @user.name %></th>
+            </tr>
+
+            <tr>
+              <th class="text-left"></th>
+              <th><%= @user.introduction %></th>
+            </tr>
+
+            <tr>
+              <th class="text-left">メールアドレス</th>
+              <th><%= @user.email %></th>
+            </tr>
+
+            <tr>
+              <th class="text-left">会員ステータス</th>
+              <th class="text-success"><%= @user.user_status %></th>
+            </tr>
+
+            <tr>
+              <th></th>
+              <th><%= link_to "編集する", edit_admin_user_path(@user), class: "btn btn-success" %></th>
+              <th class="text-left"><%= link_to "投稿履歴一覧を見る", admin_posts_path, class: "btn btn-primary" %></th>
+            </tr>
+
+      </table>
+
+  </div>
+ </div>
+</div>

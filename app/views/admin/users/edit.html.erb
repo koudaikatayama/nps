@@ -1,2 +1,54 @@
-<h1>Admin::Users#edit</h1>
-<p>Find me in app/views/admin/users/edit.html.erb</p>
+<div class="container border border-white contents-area bg-white" >
+ <div class="row mt-5 mb-5">
+  <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 mx-auto">
+    
+    <h3 class="table-active text-center"><strong class=""><%= @user.name %>さんの会員詳細/編集</strong></h3>
+
+    <%= form_with model: @user, url:admin_user_path(@user), local:true do |f| %>
+      <table class="table table-borderless">
+            <tr>
+              <th class="text-left">会員ID</th>
+              <th><%= @user.id %></th>
+            </tr>
+
+            <tr>
+              <th>プロフィール画像</th>
+              <th><%= f.file_field :profile_image, accept: 'image/*' %></th>
+            </tr>
+
+            <tr>
+              <th class="text-left">氏名</th>
+              <th><%= f.text_field :name %></th>
+            </tr>
+
+            <tr>
+              <th class="text-left"></th>
+              <th><%= f.text_area :introduction %></th>
+            </tr>
+
+            <tr>
+              <th class="text-left">メールアドレス</th>
+              <th><%= f.text_field :email %></th>
+            </tr>
+
+            <tr>
+              <th class="text-left">会員ステータス</th>
+              <th>
+              <%= f.radio_button :is_withdrawal, :false %>
+              <%= f.label :is_withdrawal_false, "有効" %>
+              <%= f.radio_button :is_withdrawal, :true %>
+              <%= f.label :is_withdrawal_true, "退会" %>
+
+              </th>
+            </tr>
+
+            <tr>
+              <th></th>
+　　　　　　　<th><%= f.submit "変更を保存", class: "btn btn-success" %></th>
+            </tr>
+
+        <% end %>
+    
+  </div>
+ </div>
+</div>

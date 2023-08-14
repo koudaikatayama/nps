@@ -39,6 +39,10 @@
             <% end %>
           </li>
           <li class="ml-1">
+            <%=  link_to admin_tags_path ,class: 'nav-link text-light' do %> タグ一覧
+            <% end %>
+          </li>
+          <li class="ml-1">
             <%=  link_to destroy_admin_session_path, method: :delete,class: 'nav-link text-light' do %> ログアウト
             <% end %>
           </li>
