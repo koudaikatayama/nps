@@ -13,9 +13,13 @@
 	  <th><%= @user.introduction %></th>
   </tr>
 </table>
+
+ <% unless @user.guest_user? %>
  <div>
   <%= link_to "編集",users_information_edit_path(@user),class: "btn btn-outline-secondary btn-block edit_user_#{@user.id}" %>
  </div>
+ <% end %>
+ 
  <div>
   <%= link_to "新規投稿",new_post_path,class: "btn btn-outline-success btn-block" %>
  </div>
