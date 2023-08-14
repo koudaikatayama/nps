@@ -1,2 +1,36 @@
-<h1>Admin::Posts#index</h1>
-<p>Find me in app/views/admin/posts/index.html.erb</p>
+<div class="container border border-white contents-area bg-white">
+ <div class="row mt-5 mb-5">
+  <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 mx-auto">
+      
+    <h3 class="table-active text-center"><strong class="">投稿一覧</strong></h3>
+    
+    <% @posts.each do |post| %>
+  <div class = ''>
+    <p>
+      <%= link_to admin_user_path(post.user) do %>
+          <%= image_tag post.user.get_profile_image, style: "border-radius: 50%; width: 50px; height: 50px; object-fit:cover;" %>
+          <%= post.user.name %>
+      <% end %>
+    </p>
+    <p><%= link_to admin_post_path(post.id) do %>
+      <%= image_tag post.get_spot_image, size: '250x150' %>
+    <% end %>
+    </p>
+    <p><%= link_to admin_post_path(post.id) do %>
+      スポット名：<%= post.name %>
+      <% end %>
+    </p>
+    <div>
+        <% post.tags.each do |tag| %>
+         <%= tag.tag_type %>
+        <% end %>
+    </div>
+    <p id="comment_counter"><%= render "public/comments/counter", post: post %></p>
+    <!--<p>スポット説明：<%= post.explanation %></p>-->
+  </div>
+<% end %>
+    
+    
+  </div>
+ </div>
+</div>
