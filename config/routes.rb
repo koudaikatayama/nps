@@ -48,6 +48,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show, :edit, :update, :destroy]
     
     resources :posts, only: [:index, :show, :edit, :update, :destroy]
+     resources :comments, only: [:create, :destroy]
     
     resources :tags, only: [:index, :create, :edit, :update, :destroy]
   end

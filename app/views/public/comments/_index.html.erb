@@ -4,7 +4,7 @@
     <tr>
       <td>
         <%= link_to users_mypage_path(comment.user) do %>
-          <%= image_tag comment.user.get_profile_image, size: "50x50" %><br>
+          <%= image_tag comment.user.get_profile_image, style: "border-radius: 50%; width: 50px; height: 50px; object-fit:cover;" %><br>
           <%= comment.user.name %>
         <% end %>
       </td>

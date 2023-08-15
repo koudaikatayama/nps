@@ -1,13 +1,28 @@
-<h1>Posts#show</h1>
-
-<div>
+<div class="container">
+<div class="row">
 <table class='table'>
+ 
   		  <tr>
-          <!--<td>ユーザー画像と名前</td>-->
-          <td><%= image_tag @post.get_spot_image, size: '500x300'%></td>
-          <td>スポット名：<%= @post.name %></td>
-          <!--ジャンル-->
-          <td>住所 : <%= @post.address %></td>
+       <td>
+        <%= link_to users_mypage_path(@post.user) do %>
+         <%= image_tag @post.user.get_profile_image, style: "border-radius: 50%; width: 50px; height: 50px; object-fit:cover;" %>
+         <%= @post.user.name %>
+        <% end %>
+       </td>
+      </tr>
+      
+      <tr>
+       <td>
+        <h4><strong><%= @post.name %></strong></h4>
+       </td>
+      </tr>
+      
+      <tbody>
+       <tr>
+          <td>
+           <%= image_tag @post.get_spot_image, size: '500x300'%>
+          </td>
+          <td>ジャンル : <%= @post.genre.name %></td>
           <td>スポット説明：<%= @post.explanation %></td>
           <td id="like_btn_<%= @post.id %>"><%= render "public/likes/btn", post: @post %></td>
           <td id="comment_counter"><%= render "public/comments/counter", post: @post %></td>
@@ -17,7 +32,12 @@
            <% end %>
           </td>
           <td>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></td>
-          
+       </tr>
+       <tr>
+        <td>住所 : <%= @post.address %></td>
+       </tr>
+      </tbody>
+        <tr>
           <td>
             <% if @post.user == current_user %>
              <%= link_to 'Edit', edit_post_path, class: "btn btn-sm btn-success" %>
@@ -29,10 +49,14 @@
             <% end %>
           </td>
         </tr>
-      </table>
-      
-      <%= render "public/comments/form", post: @post, comment: @comment %>
-      <div id="comment_index">
-       <%= render "public/comments/index", post: @post %>
-      </div>
+</table>
+
+<div>
+ <%= render "public/comments/form", post: @post, comment: @comment %>
+</div>
+<div id="comment_index">
+ <%= render "public/comments/index", post: @post %>
+</div>
+
+</div>
 </div>

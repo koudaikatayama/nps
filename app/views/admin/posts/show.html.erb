@@ -2,4 +2,59 @@
  <div class="row mt-5 mb-5">
   <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 mx-auto">
       
-    <h3 class="table-active text-center"><strong class="">投稿一覧</strong></h3>
+    <h3 class="table-active text-center"><strong class="">投稿詳細</strong></h3>
+    
+    <table class='table'>
+ 
+  		  <tr>
+       <td>
+        <%= link_to users_mypage_path(@post.user) do %>
+         <%= image_tag @post.user.get_profile_image, style: "border-radius: 50%; width: 50px; height: 50px; object-fit:cover;" %>
+         <%= @post.user.name %>
+        <% end %>
+       </td>
+      </tr>
+      
+      <tr>
+       <td>
+        <h4><strong><%= @post.name %></strong></h4>
+       </td>
+      </tr>
+      
+      <tbody>
+       <tr>
+          <td>
+           <%= image_tag @post.get_spot_image, size: '500x300'%>
+          </td>
+          <td>ジャンル : <%= @post.genre.name %></td>
+          <td>スポット説明：<%= @post.explanation %></td>
+          <td id="comment_counter"><%= render "public/comments/counter", post: @post %></td>
+          <td>
+           <% @post.tags.each do |tag| %>
+            <%= tag.tag_type %>
+           <% end %>
+          </td>
+          <td>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></td>
+       </tr>
+       <tr>
+        <td>住所 : <%= @post.address %></td>
+       </tr>
+      </tbody>
+        <tr>
+          <td>
+           <%= link_to 'Edit', edit_admin_post_path, class: "btn btn-sm btn-success" %>
+          </td>
+          <td>
+           <%= link_to 'Destroy', @post, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%>
+          </td>
+        </tr>
+</table>
+
+
+<div id="comment_index">
+ <%= render "public/comments/index", post: @post %>
+</div>
+    
+  </div>
+ </div>
+</div>
