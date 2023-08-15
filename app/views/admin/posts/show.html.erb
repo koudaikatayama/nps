@@ -42,9 +42,6 @@
       </tbody>
         <tr>
           <td>
-           <%= link_to 'Edit', edit_admin_post_path, class: "btn btn-sm btn-success" %>
-          </td>
-          <td>
            <%= link_to 'Destroy', @post, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%>
           </td>
         </tr>
@@ -52,7 +49,25 @@
 
 
 <div id="comment_index">
- <%= render "public/comments/index", post: @post %>
+ <table>
+  <tbody>
+    <% @post.comments.each do |comment| %>
+    <tr>
+      <td>
+        <%= link_to admin_user_path(comment.user) do %>
+          <%= image_tag comment.user.get_profile_image, style: "border-radius: 50%; width: 50px; height: 50px; object-fit:cover;" %><br>
+          <%= comment.user.name %>
+        <% end %>
+      </td>
+      <td><%= comment.comment %></td>
+      <td>
+          <%= link_to "Destroy", post_comment_path(@post, comment), method: :delete, class: "btn btn-sm btn-danger float-end", remote: true, data: {"turbolinks" => false} %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+ <!--<%= link_to 'Destroy', @comment, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%>-->
 </div>
     
   </div>
