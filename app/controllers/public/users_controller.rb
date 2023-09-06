@@ -3,10 +3,10 @@ class Public::UsersController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update]
   before_action :set_user, only: [:likes]
   before_action :ensure_guest_user, only: [:edit]
-  
+
   def show
-    @user = current_user
-    @posts = @user.posts
+    @user = User.find(params[:id])
+    @posts = @user.posts.order(created_at: :desc)
   end
 
   def edit
@@ -16,7 +16,7 @@ class Public::UsersController < ApplicationController
   def update
     @user = current_user
     if @user.update(user_params)
-      redirect_to users_mypage_path
+      redirect_to users_mypage_path(current_user)
     else
       render :edit
     end
@@ -31,35 +31,34 @@ class Public::UsersController < ApplicationController
     reset_session
     redirect_to root_path
   end
-  
+
   def likes
     likes = Like.where(user_id: @user.id).pluck(:post_id)
     @like_posts = Post.find(likes)
   end
-  
-  
+
+
   private
 
   def user_params
     params.require(:user).permit(:name, :profile_image, :introduction, :email, :encrypted_password, :is_withdrawal)
   end
-  
+
   def ensure_correct_user
     @user = current_user
     unless @user == current_user
       redirect_to users_mypage_path(current_user)
     end
   end
-  
+
   def set_user
     @user = User.find(params[:id])
   end
-  
+
   def ensure_guest_user
-    @user = User.find(params[:id])
+    @user = current_user
     if @user.guest_user?
       redirect_to users_mypage_path(current_user) , notice: "ゲストユーザーはプロフィール編集画面へ遷移できません。"
     end
-  end 
-  
+  end
 end

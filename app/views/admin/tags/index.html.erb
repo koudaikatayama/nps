@@ -2,13 +2,10 @@
   <div class="row mt-5 mb-5">
     <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 mx-auto">
 
-      
-      <h3><%= flash[:notice] %><%= flash[:alert] %></h3>
       <h3 class="text-center"><strong class="">タグ一覧・追加/削除</strong></h3>
 
         <%= form_with model: @tag, url: admin_tags_path,method: :post do |f| %>
           <table class="table table-border contents-area mt-5">
-            <tbody>
               <tr>
                 <td class="align-middle">タグ名</td>
                 <td class="center align-middle">
@@ -39,9 +36,6 @@
               <% end %>
             </tbody>
           </table>
-
-          
-
     </div>
   </div>
 </div>

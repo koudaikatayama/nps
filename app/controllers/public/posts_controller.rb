@@ -1,13 +1,14 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :correct_post,only: [:edit]
-  
+  GOOGLE_API_KEY = ENV["API_KEY"]
+
   def index
-    @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
+    @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all.order(created_at: :desc)
     if params[:keyword]
       @posts = @posts.search(params[:keyword]).page(params[:page])
     else
-      @posts = @posts.page(params[:page])
+      @posts = @posts.page(params[:page]).per(8)
     end
       @keyword = params[:keyword]
   end
@@ -55,14 +56,14 @@ class Public::PostsController < ApplicationController
     @post.destroy
     redirect_to posts_path
   end
-  
-  
+
+
   private
 
   def post_params
-    params.require(:post).permit(:name, :explanation, :address, :spot_image, :genre_id, tag_ids: [])
+    params.require(:post).permit(:post_status, :name, :explanation, :address, :lat,:lng, :spot_image, :genre_id, tag_ids: [])
   end
-  
+
   def correct_post
         @post = Post.find(params[:id])
     unless @post.user.id == current_user.id

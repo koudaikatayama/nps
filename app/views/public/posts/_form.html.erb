@@ -1,26 +1,118 @@
 <%= form_with model: @post do |f| %>
-  <h4>画像</h4>
-  <%= f.file_field :spot_image, accept: "image/*" %>
-  <h4>ジャンル</h4>
-  <%= f.collection_select(:genre_id, @genres, :id, :name) %>
-  <h4>スポット名</h4>
-  <%= f.text_field :name %>
-  <h4>住所</h4>
-  <%= f.text_field :address %>
-  <h4>スポット説明</h4>
-  <%= f.text_area :explanation %>
-  
-  <div class="form-group m-5">タグ</div>
+<h4 class="text-center"><strong>情報入力</strong></h4>
 
-  <div class="row d-flex justify-content-start m-5">
+ <div class="d-flex">
+  <div>
+   <%= f.label :スポット名称 %><br>
+   <%= f.text_field :name %>
+  </div>
+  <div class="ml-3">
+   <%= f.label :写真 %><br>
+   <%= f.file_field :spot_image, accept: "image/*" %>
+  </div>
+ </div>
+
+ <div class="mt-3">
+  <div class="d-flex justify-content-start">
+    <%= f.label :タグ %><br>
     <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :tag_type) do |tag| %>
-        <div class="form-check form-check-inline flex flex-wrap">
-            <%= tag.label do %>
-                <%= tag.check_box %>
-                <%= tag.text %>
-            <% end %>
-        </div>
+     <div class="form-check form-check-inline flex flex-wrap pt-4">
+      <%= tag.label do %>
+        <%= tag.check_box %>
+        <%= tag.text %>
+      <% end %>
+     </div>
     <% end %>
   </div>
-  <%= f.submit '投稿' %>
+ </div>
+
+ <div class="d-flex">
+  <div class="mr-3">
+   <%= f.label :詳細 %><br>
+   <%= f.text_area :explanation %>
+  </div>
+  <div class="pl-3">
+   <%= f.label :ジャンル %><br>
+   <%= f.collection_select(:genre_id, @genres, :id, :name) %>
+  </div>
+ </div>
+
+<h3 class="text-center border-top border-secondary mt-4"><strong>Map</strong></h3>
+
+<input id="address" type="textbox" value="GeekSalon">
+<input type="button" value="検索" onclick="codeAddress()">
+  <!--<%= f.label :lat,"緯度" %>-->
+  <%= f.text_field :lat,:value =>"緯度", id: :lat %>
+  <!--<%= f.label :lng,"経度" %>-->
+  <%= f.text_field :lng,:value =>"経度", id: :lng %>
+<p>マーカーをドラック＆ドロップで位置の調整ができます。<p>
+<div id='map'></div>
+
+<style>
+#map {
+  height: 300px;
+  width: 650px;
+}
+</style>
+
+<script>
+//初期マップの設定
+let map
+let marker
+function initMap(){
+  geocoder = new google.maps.Geocoder()
+
+  map = new google.maps.Map(document.getElementById('map'), {
+    center:  {lat: 35.6803997, lng:139.7690174},  //東京
+    zoom: 15,
+
+  });
+}
+
+//検索後のマップ作成
+let geocoder
+let aft
+function codeAddress(){
+  let inputAddress = document.getElementById('address').value;
+  geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+    if (status == 'OK') {
+        //マーカーが複数できないようにする
+        if (aft == true){
+            marker.setMap(null);
+        }
+
+        //新しくマーカーを作成する
+        map.setCenter(results[0].geometry.location);
+            marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location,
+            draggable: true	// ドラッグ可能にする
+        });
+
+        //二度目以降か判断
+        aft = true
+
+        //検索した時に緯度経度を入力する
+        document.getElementById('lat').value = results[0].geometry.location.lat();
+        document.getElementById('lng').value = results[0].geometry.location.lng();
+
+        // マーカーのドロップ（ドラッグ終了）時のイベント
+        google.maps.event.addListener( marker, 'dragend', function(ev){
+            // イベントの引数evの、プロパティ.latLngが緯度経度
+            document.getElementById('lat').value = ev.latLng.lat();
+            document.getElementById('lng').value = ev.latLng.lng();
+        });
+    } else {
+      alert('該当する結果がありませんでした：' + status);
+    }
+  });
+}
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB07UX242otgN7WuDq3uEsQL8L_4uGYT2I&callback=initMap" async defer></script>
+
+<div class="pt-2 border-bottom border-secondary">
+</div>
+
+  <%= f.submit '投稿', class: "btn btn-success my-3" %>
 <% end %>

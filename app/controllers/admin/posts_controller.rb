@@ -2,7 +2,7 @@ class Admin::PostsController < ApplicationController
   before_action :authenticate_admin!
   
   def index
-    @posts = Post.all.page(params[:page]).per(10)
+    @posts = Post.all.order(created_at: :desc)
   end
 
   def show
@@ -16,13 +16,13 @@ class Admin::PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     @post.update(post_params)
-    redirect_to admin_post_psth(@post)
+    redirect_to admin_post_path(@post)
   end
   
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to admin_posts_psth
+    redirect_to admin_posts_path
   end
   
   def post_params

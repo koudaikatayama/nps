@@ -1,29 +1,27 @@
-<h1>Users#edit</h1>
-
 <div class='container'>
-  <div class='row'>
+  <div class='row mt-4'>
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
-    <h2>User info</h2>
+    <h3 class="text-center"><strong>プロフィール編集</strong></h3>
+
     <%= form_with model: @user, url:users_information_path(@user), local:true do |f| %>
       <%= render 'layouts/errors', obj: @user %>
-      <div class="form-group">
-        <%= f.label :image %>
+      <div class="form-group pt-5">
+        <%= f.label :プロフィール画像 %>
         <%= f.file_field :profile_image, class: "form-control-file user_image", accept: 'image/*' %>
       </div>
-      <div class="form-group">
-        <%= f.label :name %>
+      <div class="form-group mt-3">
+        <%= f.label :ニックネーム %>
         <%= f.text_field :name, class: "form-control name" %>
       </div>
-      <div class="form-group">
-        <%= f.label :introduction %>
+      <div class="form-group mt-3">
+        <%= f.label :紹介文 %>
         <%= f.text_area :introduction, class: "form-control introduction" %>
       </div>
-      
-      <div class="form-group">
-        <%= f.submit class: 'btn btn-success' %>
-      </div>
-      <div>
-        <%= link_to "退会する", users_check_path, class: "btn btn-danger" %>
+
+      <div class="form-group d-flex flex-row bd-highlight pt-3">
+        <%= f.submit "プロフィール更新", class: 'btn btn-success' %>
+        
+        <%= link_to "退会する", users_check_path, class: "btn btn-danger ml-3" %>
       </div>
     <% end %>
   </div>

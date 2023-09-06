@@ -1,17 +1,17 @@
 <table>
   <tbody>
     <% post.comments.each do |comment| %>
-    <tr>
-      <td>
+    <tr class='border-bottom border-secondary'>
+      <td class='pl-3 py-2'>
         <%= link_to users_mypage_path(comment.user) do %>
           <%= image_tag comment.user.get_profile_image, style: "border-radius: 50%; width: 50px; height: 50px; object-fit:cover;" %><br>
           <%= comment.user.name %>
         <% end %>
       </td>
-      <td><%= comment.comment %></td>
-      <td>
+      <td class='pl-4'><%= comment.comment %></td>
+      <td class='px-3'>
         <% if comment.user == current_user %>
-          <%= link_to "Destroy", post_comment_path(post, comment), method: :delete, class: "btn btn-sm btn-danger float-end", remote: true, data: {"turbolinks" => false} %>
+          <%= link_to "コメント削除", post_comment_path(post, comment), method: :delete, class: "btn btn-sm btn-outline-danger float-end", remote: true, data: {"turbolinks" => false} %>
         <% end %>
       </td>
     </tr>

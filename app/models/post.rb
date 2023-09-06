@@ -10,7 +10,7 @@ class Post < ApplicationRecord
   has_many :tags, through: :association_post_and_tags
   
   validates :name, presence: true
-  validates :explanation, length: { minimum: 1, maximum: 100 }
+  validates :explanation, length: { minimum: 1, maximum: 100 }, presence: true
     
   def get_spot_image
     (spot_image.attached?) ? spot_image : 'no_spot_image.jpg'

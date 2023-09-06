@@ -26,7 +26,7 @@ Rails.application.routes.draw do
       resource :likes, only: [:create, :destroy]
     end
     
-    get "users/mypage" => "users#show"
+    get "users/mypage/:id" => "users#show", as: "users_mypage"
     get "users/information/edit" => "users#edit"
     patch "users/information" => "users#update"
     get "/users/check" => "users#check"
@@ -43,7 +43,12 @@ Rails.application.routes.draw do
   namespace :admin do
     get "/" => "homes#top"
     
-    resources :genres, only: [:index, :create, :edit, :update]
+    resources :genres, only: [:index, :create, :edit, :update,]
+    resources :genres do
+      member do
+        delete :destroy
+      end
+    end
     
     resources :users, only: [:index, :show, :edit, :update, :destroy]
     

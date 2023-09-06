@@ -1,36 +1,31 @@
 <div class='container'>
- <div class='row'>
-  <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
-    
-<table class='table'>
-  <tr><%= image_tag @user.get_profile_image, style: "border-radius: 50%; width: 200px; height: 200px; object-fit:cover;" %></tr>
-  <tr>
-	  <th>name</th>
-	  <th><%= @user.name %></th>
-  </tr>
-  <tr>
-	  <th>introduction</th>
-	  <th><%= @user.introduction %></th>
-  </tr>
-</table>
+ <div class='row mt-4'>
+  
+  <div class='col-3'><%= image_tag @user.get_profile_image, style: "border-radius: 50%; width: 200px; height: 200px; object-fit:cover;" %></div>
 
- <% unless @user.guest_user? %>
- <div>
-  <%= link_to "編集",users_information_edit_path(@user),class: "btn btn-outline-secondary btn-block edit_user_#{@user.id}" %>
- </div>
- <% end %>
- 
- <div>
-  <%= link_to "新規投稿",new_post_path,class: "btn btn-outline-success btn-block" %>
- </div>
- 
- <div><%= link_to "いいねした投稿", likes_user_path(@user), class: "btn btn-outline-info btn-block"%></div>
+	  <div class='col-6'>
+	   <h3 class='py-3'><strong><%= @user.name %></strong></h3>
+	   <h5 class='pt-3 border-top border-secondary'><strong><%= @user.introduction %></strong></h5>
+	  </div>
+	  
+	 <% if @user == current_user %> 
+	  <div class='col-3'>
+	   <% unless @user.guest_user? %>
+     <div class='col-sm-12 mt-5'>
+      <%= link_to "プロフィール編集",users_information_edit_path(@user),class: "btn btn-dark btn-block mr-3 edit_user_#{@user.id}" %>
+    <% end %>
+    
+      <%= link_to "いいねした投稿", likes_user_path(@user), class: "btn btn-info btn-block mr-3"%>
+      <%= link_to "新規投稿",new_post_path,class: "btn btn-success btn-block" %>
+     </div>
+  <% end %>
+	   
+	  </div>
   </div>
  </div>
-</div>
 
 <div class='container'>
-<div class='row'>
-<div><%= render "public/posts/index" %></div>
-</div>
+ <div class='row mt-4'>
+  <div class='col-sm-12 offset-md-1'><%= render "public/posts/index" %></div>
+ </div>
 </div>

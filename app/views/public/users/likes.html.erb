@@ -1,2 +1,9 @@
-<p>いいねした投稿一覧</p>
-<%= render partial: "public/posts/post", collection: @like_posts %>
+<div class='container'>
+ <div class='row mt-4 mb-4'>
+  <div class='col-md-8 offset-md-1'>
+   <h3 class='text-center'><strong>いいねした投稿一覧</strong></h3>
+   <div class='row'><%= render partial: "public/posts/post", collection: @like_posts %></div>
+
+  </div>
+ </div>
+</div>

@@ -1,14 +1,13 @@
 <div class='container'>
-<div class='row'>
-<div class='col-md-3'>
- <%= render 'public/users/info', user: current_user %>
-</div>
+ <div class='row mt-4 mb-4'>
+  <div class='col-md-2 mt-4'>
+   <%= render 'public/users/info', user: current_user %>
+  </div>
 
-<div class='col-md-8 offset-md-0'>
-<%= render "search", post: @post %>
-<%= render "public/posts/index", post: @post %>
-</div>
-
-
-</div>
+  <div class='col-md-8 offset-md-1'>
+   <div class='ml-3'><%= render "search", post: @post %></div>
+    <div class='row'><%= render "public/posts/index", post: @post %></div>
+  </div>
+ <div class="px-5 px-sm-0 mt-4 mx-auto"><%= paginate @posts %></div>
+ </div>
 </div>
