@@ -1,7 +1,7 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :correct_post,only: [:edit]
-  GOOGLE_API_KEY = ENV["API_KEY"]
+  # GOOGLE_API_KEY = ENV["GOOGLE_MAPS_API_KEY"]
 
   def index
     @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all.order(created_at: :desc)
