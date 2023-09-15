@@ -26,7 +26,7 @@ class Public::PostsController < ApplicationController
     else
      @posts = Post.all
      @genres = Genre.all
-     render 'index'
+     render 'new'
     end
   end
 
