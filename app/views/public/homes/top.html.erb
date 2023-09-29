@@ -5,10 +5,14 @@
  <% else %>
   <div class="col-sm-2 mt-5 pt-5">
    <div class="row">
-    <%= link_to "ログイン",new_user_session_path, class: "btn btn-info btn-sm btn-block mb-4 sign_in" %>
+    <%= link_to new_user_session_path, class: "btn btn-info btn-sm btn-block mb-4 sign_in" do %>
+        <i class="fas fa-sign-in-alt"></i> ログイン
+    <% end %>
    </div>
    <div class="row pt-4">
-    <%= link_to "新規登録",new_user_registration_path, class: "btn btn-success btn-sm btn-block mb-4 sign_up" %>
+    <%= link_to new_user_registration_path, class: "btn btn-success btn-sm btn-block mb-4 sign_up" do %>
+        <i class="fas fa-user-plus"></i> 新規登録
+    <% end %>
    </div>
    <div class="row pt-4">
     <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, class: "btn btn-secondary btn-sm btn-block", method: :post %>
